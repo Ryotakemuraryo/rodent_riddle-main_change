@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rodent Riddle</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" type="module"></script>
+    <script>
+        function toggleAnswer(button) {
+            const answer = button.nextElementSibling;
+            if (answer.style.display === 'none') {
+                answer.style.display = 'block';
+                button.textContent = 'Hide our suggested answer';
+            } else {
+                answer.style.display = 'none';
+                button.textContent = 'Show our suggested answer';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Rodent Riddle</h1>
+    
+
+    <!-- Circadian Rhythm -->
+    <h2>Circadian Rhythm</h2>
+    <p class="viz-instructions">
+        This visualization shows mouse movement patterns and body temperature over multiple day/night cycles. The main plot (left) displays mouse positions and their movement (more active movement represent higher activity levels), while the right plot shows the relationship between temperature and activity levels. The color of each point represents the body temperature of the mouse.
+    </p>
+    <ul class="viz-features">
+        <li><strong>Mouse Movement:</strong> Each point represents a mouse, with colors indicating body temperature (blue: cooler, red: warmer).</li>
+        <li><strong>Day/Night Cycles:</strong> Background changes indicate light conditions, with the status shown in the top-right corner.</li>
+        <li><strong>Interactive Features:</strong>
+            <ul>
+                <li>Hover over any point to see detailed mouse data and highlight the same mouse in both plots</li>
+                <li>Hover pauses the animation automatically</li>
+                <li>Use the time slider to navigate through the data</li>
+                <li>Play/Pause and Reset buttons control the animation</li>
+            </ul>
+        </li>
+        <li><strong>Temperature Scale:</strong> The color bar below the main plot shows the temperature range from 35°C (blue) to 39°C (red).</li>
+    </ul>
+    <div id="circadian-viz">
+        <!-- Visualization will be dynamically added here (circadian.js) -->    
+    </div>
+    <p class="viz-questions">
+        <strong>Question to consider:</strong> How do the activity patterns of these mice across day and night cycles reveal their natural circadian rhythm?
+    </p>
+    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show our suggested answer</button>
+    <p class="viz-answer" style="display: none;">
+        <strong>Our suggested answer:</strong> The visualization reveals clear circadian patterns in mouse behavior. During light-off periods (night), mice consistently show heightened activity levels, coupled with elevated body temperatures (shown by warmer colors). Conversely, during light-on periods (day), their activity decreases significantly, and body temperatures tend to be cooler. This day-night activity pattern strongly indicates nocturnal behavior, which is an evolutionary adaptation common in rodents. The synchronization between activity levels and body temperature also demonstrates how circadian rhythms coordinate multiple physiological processes to optimize survival during their most active periods.
+    </p>
+
+
+    <!-- Other Visualizations (Use the same template) -->
+    <h2>Other Visualizations ...</h2>
+    <p class="viz-instructions"></p>
+    <ul class="viz-features"></ul>
+    <div id="other-viz">
+        <!-- Visualization will be dynamically added here (other-file.js) -->    
+    </div>
+    <p class="viz-questions"></p>
+    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show our suggested answer</button>
+    <p class="viz-answer" style="display: none;"></p>
+<hr>
+<h2>Initial Prototype Writeup</h2>
+<div class="reflection-box">
+<p>
+    So far, we have created our central visualization and have laid out the template for any additional visualizations. The central visualization is an overview of most of the features all at once. It aims to show viewers the general heat and activity trends of mice throughout each period of day and night. Smaller future visualizations will focus on more specific aspects of the dataset. By creating visualization and suggested response templates, additional work for the project will be streamlined. Our process is to add in a short visualization to guide viewers through the interactive visualization, add a d3 plot, ask viewers an insightful question, and to answer their question using the drop-down suggested answer component. Using this format, our project can meet its original goal of teaching researchers about their mice in an engaging way, but can also be used to teach people (especially children) how to gain insight from a graph or visualization.
+</p>
+<p>
+    The most challenging part of the project remaining is to curate a few more visualizations that feel fresh and interactive. Our dataset is limited in its number of features (we can explore activity, temperature, gender, and estrus cycles), and so we'll need to work to create visualizations that add insight without feeling redundant. Our second challenge will be to come up with critical engagement questions that strike a balance between being too technical and boringly simple. A mix of difficulties will be beneficial, and our target is for the level of engagement to be at the point to make an older kid think for a few minutes and require most viewers to take a second look at the visualization before answering. These questions give us the most opportunity to ensure that scientists aren't missing interesting details and to promote learning for the rest of our audience, so it's important that we get their level of difficulty right.
+</p>
+</div>
+
+</body>
+</html>

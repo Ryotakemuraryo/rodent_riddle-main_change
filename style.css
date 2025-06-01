@@ -1,0 +1,216 @@
+:root {
+  /* Base Palette */
+  --color-background: #B8CFCE; 
+  --color-secondary: #7F8CAA;
+  --color-accent: #333446;
+  --color-light: #EAEFEF;
+
+  /* Gender Colors */
+  --color-female: #E86A92;
+  --color-male: #4C72B0;
+
+  /* Day/Night Colors */
+  --color-day: #F4C05E;
+  --color-night: #506680;
+}
+
+
+
+/* === Global Styles === */
+body {
+    font: 100%/1.5 system-ui;
+    max-width: 100ch;
+    margin-inline: max(1em, (100% - 100ch) / 2);
+    line-height: 1.6;
+    padding: 20px;
+    background-color: var(--color-background);
+    color: var(--color-accent);
+}
+
+h1 {
+    font-size: 400%;
+    margin-bottom: 1rem;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.1;
+}
+
+
+/* === Visualization Write Up Styles === */
+.reflection-box {
+    background-color: var(--color-light);
+    border-left: 6px solid var(--color-accent);
+    padding: 16px;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px var(--color-accent);
+    border-radius: 8px;
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: var(--color-accent);
+}
+
+.viz-instructions {
+    color: var(--color-accent);
+    margin: 1em 0;
+    line-height: 1.6;
+    font-size: 0.95em;
+}
+
+.viz-features {
+    color: var(--color-accent);
+    margin: 1em 0;
+    line-height: 1.6;
+    font-size: 0.95em;
+}
+
+.viz-features strong,
+.viz-instructions strong,
+.viz-questions strong {
+    color: var(--color-accent);
+}
+
+.viz-questions {
+    margin-top: 2em;
+    color: var(--color-accent);
+}
+
+.viz-questions h3 {
+    color: var(--color-secondary);
+    margin-bottom: 1em;
+}
+
+.viz-questions ol {
+    padding-left: 1.5em;
+    line-height: 1.6;
+}
+
+.viz-questions li {
+    margin-bottom: 1em;
+}
+
+.viz-answer {
+    color: var(--color-accent);
+    margin: 1em 0 2em;
+    line-height: 1.6;
+    font-size: 0.95em;
+    padding: 1em;
+    background-color: var(--color-light);
+    border-radius: 4px;
+}
+
+.show-answer-btn {
+    background-color: var(--color-accent);
+    color: var(--color-light);
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+}
+
+.show-answer-btn:hover {
+    opacity: 0.8;
+    transform: translateY(-1px);
+}
+
+.show-answer-btn:active {
+    transform: translateY(0);
+}
+
+
+
+/* === Circadian Visualization === */
+#circadian-viz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 100ch;  /* Match body max-width */
+    margin: 0 auto;    /* Center the container */
+}
+
+#circadian-viz .temp-axis, 
+#circadian-viz .act-axis {
+    color: var(--color-accent);
+}
+
+#circadian-viz .temp-axis text, 
+#circadian-viz .act-axis text {
+    fill: var(--color-accent);
+    font-size: 12px;
+}
+
+#circadian-viz .temp-axis path, 
+#circadian-viz .act-axis path,
+#circadian-viz .temp-axis line, 
+#circadian-viz .act-axis line {
+    stroke: var(--color-accent);
+}
+
+/* Button styles */
+#circadian-viz button {
+    transition: all 0.2s ease;
+}
+
+#circadian-viz button:hover {
+    opacity: 0.8;
+    transform: translateY(-1px);
+}
+
+#circadian-viz button:active {
+    transform: translateY(0);
+}
+
+/* Slider styles */
+#circadian-viz input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: var(--color-light);
+    border-radius: 3px;
+    outline: none;
+}
+
+#circadian-viz input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--color-secondary);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#circadian-viz input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--color-secondary);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+#circadian-viz .light-status {
+    font-size: 0.9em;
+    fill: var(--color-accent);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+#circadian-viz .light-status-bg {
+    border-radius: 4px;
+}
+
+#circadian-viz .mouse-point,
+#circadian-viz .temp-act-point {
+    cursor: pointer;
+}
+
+#circadian-viz svg {
+    cursor: pointer;
+}
