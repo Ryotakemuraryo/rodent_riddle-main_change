@@ -7,14 +7,22 @@ export function compareTemperatureChart() {
     d3.json('./data/1dayafter_estrus_combined.json'),
     d3.json('./data/2dayafter_estrus_combined.json')
   ]).then(([estrusData, beforeData, after1Data, after2Data]) => {
-    const width = 800;
-    const height = 400;
+    const width = 1000;
+    const height = 500;
     const margin = { top: 20, right: 30, bottom: 50, left: 50 };
 
     const svg = d3.select('#other-viz')
       .append('svg')
       .attr('width', width)
       .attr('height', height);
+
+    svg.append("text")
+      .attr("x", width / 2)
+      .attr("y", 15)
+      .attr("text-anchor", "middle")
+      .style("font-size", "20px")
+      .style("font-weight", "bold")
+      .text("Female Mouse Temperature Comparison in a Day");
 
     const allData = estrusData.concat(beforeData, after1Data, after2Data);
 
@@ -31,23 +39,20 @@ export function compareTemperatureChart() {
       .x(d => x(d.time))
       .y(d => y(d.temperature));
 
-    // 背景グラデーション
     svg.append("defs")
-    .append("linearGradient")
-    .attr("id", "background-gradient")
-    .attr("x1", "0%").attr("x2", "100%")
-    .attr("y1", "0%").attr("y2", "0%")
-    .selectAll("stop")
-    .data([
-        { offset: "0%", color: "#506680" },   // left edge: night
-        { offset: "50%", color: "#F4C05E" },  // center: day
-        { offset: "100%", color: "#506680" }  // right edge: night
-    ])
-    .enter()
-    .append("stop")
-    .attr("offset", d => d.offset)
-    .attr("stop-color", d => d.color);
-
+      .append("linearGradient")
+      .attr("id", "background-gradient")
+      .attr("x1", "0%").attr("x2", "100%")
+      .attr("y1", "0%").attr("y2", "0%")
+      .selectAll("stop")
+      .data([
+        { offset: "0%", color: "#506680" },  
+        { offset: "100%", color: "#F4C05E" } 
+      ])
+      .enter()
+      .append("stop")
+      .attr("offset", d => d.offset)
+      .attr("stop-color", d => d.color);
 
     svg.append("clipPath")
       .attr("id", "clip-region")
@@ -65,7 +70,7 @@ export function compareTemperatureChart() {
       .attr("fill", "url(#background-gradient)")
       .attr("clip-path", "url(#clip-region)")
       .attr("opacity", 0.5);
-    // 軸
+
     svg.append('g')
       .attr('transform', `translate(0,${height - margin.bottom})`)
       .call(d3.axisBottom(x))
@@ -87,12 +92,12 @@ export function compareTemperatureChart() {
       .attr('text-anchor', 'middle')
       .text('Temperature (°C)');
 
-    // 線描画
+
     const datasets = [
-      { data: estrusData, color: 'tomato', label: 'Estrus Day' },
-      { data: beforeData, color: 'steelblue', label: '1 Day Before' },
-      { data: after1Data, color: 'green', label: '1 Day After' },
-      { data: after2Data, color: 'purple', label: '2 Days After' }
+      { data: estrusData, color: 'red', label: 'Estrus Day' },
+      { data: beforeData, color: 'steelblue', label: '1 Day Before Estrus Day' },
+      { data: after1Data, color: 'green', label: '1 Day After Estrus Day' },
+      { data: after2Data, color: 'purple', label: '2 Days After Estrus Day' }
     ];
 
     datasets.forEach(d => {
@@ -104,14 +109,12 @@ export function compareTemperatureChart() {
         .attr('d', line);
     });
 
-    // 凡例
     datasets.forEach((d, i) => {
       const yPos = 30 + i * 20;
-      svg.append("circle").attr("cx", width - 150).attr("cy", yPos).attr("r", 6).style("fill", d.color);
-      svg.append("text").attr("x", width - 140).attr("y", yPos + 4).text(d.label).style("font-size", "12px");
+      svg.append("circle").attr("cx", width - 200).attr("cy", yPos).attr("r", 6).style("fill", d.color);
+      svg.append("text").attr("x", width - 190).attr("y", yPos + 4).text(d.label).style("font-size", "12px");
     });
 
-    // ツールチップと縦線
     const tooltip = d3.select("#other-viz")
       .append("div")
       .style("position", "absolute")
@@ -154,7 +157,6 @@ export function compareTemperatureChart() {
           activities[d.label] = getActivity(d.data);
         });
 
-        // sort by activity value descending
         const sorted = Object.entries(activities)
           .filter(([, val]) => val != null)
           .sort((a, b) => b[1] - a[1]);
